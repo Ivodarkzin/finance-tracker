@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title">Total de gastos</h6>
+                <h2>R$ {{ '%.2f'|format(total) }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title">Gastos por categoria</h6>
+                {% if chart_labels %}
+                <canvas id="categoryChart" height="90"></canvas>
+                {% else %}
+                <p class="text-muted mb-0">Nenhum gasto cadastrado ainda.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Seus gastos</h5>
+
+        {% if expenses %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in expenses %}
+                    <tr>
+                        <td>{{ e.description }}</td>
+                        <td><span class="badge bg-secondary">{{ e.category.name }}</span></td>
+                        <td>{{ e.date.strftime('%d/%m/%Y') }}</td>
+                        <td>R$ {{ '%.2f'|format(e.amount) }}</td>
+                        <td class="text-end">
+                            <a href="{{ url_for('edit_expense', expense_id=e.id) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            <form method="POST" action="{{ url_for('delete_expense', expense_id=e.id) }}" class="d-inline" onsubmit="return confirm('Excluir este gasto?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted mb-0">Você ainda não cadastrou nenhum gasto. <a href="{{ url_for('add_expense') }}">Adicionar agora</a>.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if chart_labels %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+    const ctx = document.getElementById('categoryChart');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ chart_labels|tojson }},
+            datasets: [{
+                label: 'Gasto (R$)',
+                data: {{ chart_values|tojson }},
+                backgroundColor: '#0d6efd'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } }
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}
