@@ -66,7 +66,20 @@ Acesse **http://127.0.0.1:5000** no navegador. O banco de dados SQLite e as cate
 
 ## 📸 Telas do sistema
 
-> Adicione aqui prints da aplicação (login, dashboard e formulário de gastos) depois de rodar o projeto — recrutadores dão muito mais atenção a repositórios com preview visual.
+## 📸 Telas do sistema
+
+### 🔐 Tela de Login
+
+![Tela de Login](screenshots/login.png)
+
+### 📊 Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### 💰 Controle de Gastos
+
+![Controle de Gastos](screenshots/gastos.png)
+
 
 ## 🔮 Possíveis melhorias futuras
 
