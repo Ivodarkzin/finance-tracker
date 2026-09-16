@@ -68,15 +68,16 @@ Acesse **http://127.0.0.1:5000** no navegador. O banco de dados SQLite e as cate
 
 ### 🔐 Tela de Login
 
-![Tela de Login](screenshots/login.png)
+![Tela de Login](screenshots/Login.png)
 
 ### 📊 Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/Dashboard.png)
 
 ### 💰 Controle de Gastos
 
 ![Controle de Gastos](screenshots/gastos.png)
+
 
 ## 🔮 Possíveis melhorias futuras
 
