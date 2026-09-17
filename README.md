@@ -48,7 +48,7 @@ O sistema possui três tabelas relacionadas:
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/SEU-USUARIO/finance-tracker.git
+git clone https://github.com/Ivodarkzin/finance-tracker.git
 cd finance-tracker
 
 # 2. Crie um ambiente virtual
